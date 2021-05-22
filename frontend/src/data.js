@@ -7,7 +7,7 @@ const data = {
       image: "/images/BlueDressShirt.jpg",
       price: 40,
       brand: "Polo",
-      rating: 4.5,
+      rating: 2,
       numReviews: 10,
       description: "High quality dress shirt",
     },
