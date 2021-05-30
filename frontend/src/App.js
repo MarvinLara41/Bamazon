@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 /* Screens */
 import HomeScreen from "./screens/HomeScreen";
@@ -21,8 +21,10 @@ function App() {
           </div>
         </header>
         <main>
-          <Route path="/product/:id" component={ProductScreen} />
-          <Route path="/" extact component={HomeScreen} />
+          <Switch>
+            <Route path="/product/:id" component={ProductScreen} />
+            <Route extact path="/" component={HomeScreen} />
+          </Switch>
         </main>
         <footer className="row center">All rights reserved.</footer>
       </div>
