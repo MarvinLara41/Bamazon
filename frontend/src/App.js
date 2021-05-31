@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import CartScreen from "./screens/CartScreen";
 
 /* Screens */
 import HomeScreen from "./screens/HomeScreen";
@@ -12,7 +13,7 @@ function App() {
         <header className="row">
           <div>
             <a className="brand" href="/">
-              Solar
+              Bamazon
             </a>
           </div>
           <div>
@@ -23,6 +24,7 @@ function App() {
         <main>
           <Switch>
             <Route path="/product/:id" component={ProductScreen} />
+            <Route path="/cart/:id?" component={CartScreen} />
             <Route extact path="/" component={HomeScreen} />
           </Switch>
         </main>
