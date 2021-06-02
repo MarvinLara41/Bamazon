@@ -76,6 +76,10 @@ footer {
   padding: 5rem;
 }
 
+.min-30 {
+  min-width: 30rem;
+}
+
 /*Common classes*/
 h1 {
   font-size: 1.8rem;
@@ -158,6 +162,11 @@ img {
   border-radius: 0.5rem;
   max-height: 50rem;
   max-width: 50rem;
+}
+
+img.small {
+  max-width: 5rem;
+  width: 100%;
 }
 
 img.medium {
