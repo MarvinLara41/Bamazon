@@ -32,6 +32,16 @@ header {
   background-color: #8fbc8f;
 }
 
+.badge {
+  /* Notification next to Cart header*/
+  background-color: #f02020;
+  color: #ffff;
+  border-radius: 50%;
+  padding: 0.2rem 0.7rem;
+  font-size: 1.4rem;
+  margin-left: 0.2rem;
+}
+
 main {
   grid-area: main;
   padding: 1rem;

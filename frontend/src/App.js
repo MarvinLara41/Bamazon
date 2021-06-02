@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import CartScreen from "./screens/CartScreen";
 
 /* Screens */
@@ -7,18 +8,28 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 
 function App() {
+  /**showing notification of the number of items in the cart */
+  const cart = useSelector((state) => state.cart);
+
+  const { cartItems } = cart;
+
   return (
     <BrowserRouter>
       <div className="grid-container">
         <header className="row">
           <div>
-            <a className="brand" href="/">
+            <Link className="brand" to="/">
               Bamazon
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="/cart">Cart</a>
-            <a href="/signin">Sign In</a>
+            <Link to="/cart">
+              Cart
+              {cartItems.length > 0 && (
+                <span className="badge">{cartItems.length}</span>
+              )}
+            </Link>
+            <Link to="/signin">Sign In</Link>
           </div>
         </header>
         <main>
