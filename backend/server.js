@@ -1,5 +1,12 @@
 import express from "express";
 
+import mongoose from "mongoose";
+
+import dotenv from "dotenv";
+dotenv.config();
+
+import config from "./config.js";
+
 import data from "./data.js";
 
 const app = express();
@@ -23,6 +30,26 @@ app.get("/", (req, res) => {
   res.send("Sever is ready.");
 });
 
+//** Connect to MongoDB */
+
+const MONGODB_URI = config.MONGODB_URI;
+
+mongoose
+  .connect(
+    MONGODB_URI,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    },
+    console.log("Connected to MongoDB")
+  )
+
+  .catch((error) => console.log(error.reason));
+
+//** Validating connecting to server */
 app.listen(port, () => {
   console.log(`Server at ${port}`);
 });
+
+export default app;
