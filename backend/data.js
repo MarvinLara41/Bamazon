@@ -17,7 +17,6 @@ const data = {
   ],
   products: [
     {
-      _id: "1",
       name: "Blue Dress Shirt",
       category: "Shirts",
       image: "/images/BlueDressShirt.jpg",
