@@ -8,6 +8,7 @@ dotenv.config();
 import config from "./config.js";
 
 import data from "./data.js";
+import userRouter from "./routers/userRouter.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -26,25 +27,26 @@ app.get("/api/products/:id", (req, res) => {
   }
 });
 
+app.use("/api/users", userRouter);
+
+//** Error handler */
+app.use((err, req, res, next) => {
+  res.status(500, send({ message: err.message }));
+});
+
 app.get("/", (req, res) => {
   res.send("Sever is ready.");
 });
 
 //** Connect to MongoDB */
 
-const MONGODB_URI = config.MONGODB_URI;
-
 mongoose
-  .connect(
-    MONGODB_URI,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    },
-    console.log("Connected to MongoDB")
-  )
-
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/Bamazon", {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.log(error.reason));
 
 //** Validating connecting to server */

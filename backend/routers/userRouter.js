@@ -1,10 +1,22 @@
 import express from "express";
 
+import expressAsyncHandler from "express-async-handler";
+
 import bcrypt from "bcryptjs";
 
-import User from "../models/userModel";
+import User from "../models/userModel.js";
+
+import data from "../data.js";
 
 const userRouter = express.Router();
+
+userRouter.get(
+  "/seed",
+  expressAsyncHandler(async (req, res) => {
+    const createdUsers = await User.insertMany(data.user);
+    res.send({ createdUsers });
+  })
+);
 
 userRouter.post("/api/register", async (req, res) => {
   const user = new User({
@@ -28,3 +40,5 @@ userRouter.post("/api/register", async (req, res) => {
     });
   }
 });
+
+export default userRouter;
