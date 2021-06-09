@@ -9,6 +9,10 @@ import userRouter from "./routers/userRouter.js";
 import productRouter from "./routers/productRouter.js";
 
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 const port = process.env.PORT || 5000;
 
 app.use("/api/users", userRouter);
@@ -16,7 +20,7 @@ app.use("/api/products", productRouter);
 
 //** Error handler */
 app.use((err, req, res, next) => {
-  res.status(500, send({ message: err.message }));
+  res.status(500, res.send({ message: err.message }));
 });
 
 app.get("/", (req, res) => {

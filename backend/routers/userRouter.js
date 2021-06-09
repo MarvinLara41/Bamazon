@@ -8,6 +8,8 @@ import User from "../models/userModel.js";
 
 import data from "../data.js";
 
+import { generateToken } from "../utils.js";
+
 const userRouter = express.Router();
 
 userRouter.get(
@@ -18,27 +20,26 @@ userRouter.get(
   })
 );
 
-userRouter.post("/api/register", async (req, res) => {
-  const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-  });
+userRouter.post(
+  "/signin",
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findOne({ email: req.body.email });
 
-  const newUser = await user.save();
+    if (user) {
+      if (bcrypt.compareSync(req.body.password, user.password)) {
+        res.send({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          token: generateToken(user),
+        });
 
-  if (newUser) {
-    res.send({
-      _id: newUser.id,
-      name: newUser.name,
-      email: newUser.email,
-      password: newUser.password,
-    });
-  } else {
-    res.status(401).send({
-      msg: "Something is wrong. Please try again.",
-    });
-  }
-});
+        return;
+      }
+    }
+    res.status(401).send({ message: "Invalid user email or password" });
+  })
+);
 
 export default userRouter;
