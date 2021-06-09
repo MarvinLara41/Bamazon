@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { signin } from "../actions/userActions.js";
 
 export default function SigninScreen() {
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
   const submitHandler = (e) => {
     e.preventDefault();
 
     /**Sign In action */
+
+    dispatch(signin(email, password));
   };
 
   return (
