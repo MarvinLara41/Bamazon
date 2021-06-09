@@ -6,6 +6,7 @@ import CartScreen from "./screens/CartScreen";
 /* Screens */
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
+import SigninScreen from "./screens/SigninScreen";
 
 function App() {
   /**showing notification of the number of items in the cart */
@@ -36,6 +37,7 @@ function App() {
           <Switch>
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
+            <Route path="/signin" component={SigninScreen} />
             <Route extact path="/" component={HomeScreen} />
           </Switch>
         </main>
