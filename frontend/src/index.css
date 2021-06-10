@@ -235,6 +235,10 @@ img.large {
   background-color: #ffe0e0e0;
 }
 
+.loading {
+  display: block !important;
+}
+
 /** Sign In Scree **/
 
 .form {
