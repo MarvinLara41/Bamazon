@@ -6,6 +6,7 @@ import CartScreen from "./screens/CartScreen";
 
 /* Screens */
 import HomeScreen from "./screens/HomeScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import ProductScreen from "./screens/ProductScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
@@ -62,11 +63,12 @@ function App() {
         </header>
         <main>
           <Switch>
-            <Route path="/product/:id" component={ProductScreen} />
-            <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/signin" component={SigninScreen} />
-            <Route path="/register" component={RegisterScreen} />
-            <Route path="/shipping" component={ShippingAddressScreen} />
+            <Route path="/product/:id" component={ProductScreen}></Route>
+            <Route path="/cart/:id?" component={CartScreen}></Route>
+            <Route path="/signin" component={SigninScreen}></Route>
+            <Route path="/register" component={RegisterScreen}></Route>
+            <Route path="/shipping" component={ShippingAddressScreen}></Route>
+            <Route path="/payment" component={PaymentMethodScreen}></Route>
             <Route extact path="/" component={HomeScreen} />
           </Switch>
         </main>
