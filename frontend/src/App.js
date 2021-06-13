@@ -7,6 +7,7 @@ import CartScreen from "./screens/CartScreen";
 /* Screens */
 import HomeScreen from "./screens/HomeScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import ProductScreen from "./screens/ProductScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
@@ -69,7 +70,8 @@ function App() {
             <Route path="/register" component={RegisterScreen}></Route>
             <Route path="/shipping" component={ShippingAddressScreen}></Route>
             <Route path="/payment" component={PaymentMethodScreen}></Route>
-            <Route extact path="/" component={HomeScreen} />
+            <Route path="/placeorder" component={PlaceOrderScreen}></Route>
+            <Route extact path="/" component={HomeScreen}></Route>
           </Switch>
         </main>
         <footer className="row center">All rights reserved.</footer>

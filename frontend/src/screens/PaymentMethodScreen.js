@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { savePaymentMethod } from "../actions/cartActions";
 import CheckOutSteps from "../components/CheckOutSteps";
@@ -9,7 +8,7 @@ export default function PaymentMethodScreen(props) {
 
   const { shippingAddress } = cart;
 
-  if (!shippingAddress.shippingAddress) {
+  if (!shippingAddress.address) {
     props.history.push("/shipping");
   }
 
@@ -21,7 +20,7 @@ export default function PaymentMethodScreen(props) {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
 
-    <Redirect to="/payment" />;
+    props.history.push("/placeorder");
   };
 
   return (
