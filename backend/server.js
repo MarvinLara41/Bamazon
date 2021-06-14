@@ -7,6 +7,7 @@ dotenv.config();
 
 import userRouter from "./routers/userRouter.js";
 import productRouter from "./routers/productRouter.js";
+import orderRouter from "./routers/orderRouter.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ const port = process.env.PORT || 5000;
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
+app.use("/api/orders", orderRouter);
 
 //** Error handler */
 app.use((err, req, res, next) => {
