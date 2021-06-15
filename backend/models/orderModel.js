@@ -23,6 +23,12 @@ const orderSchema = new mongoose.Schema(
       country: { type: String, required: true },
     },
     paymentMethod: { type: String, required: true },
+    paymentResult: {
+      id: String,
+      status: String,
+      update_time: String,
+      email_address: String,
+    },
     itemsPrice: { type: Number, required: true },
     shippingPrice: { type: Number, required: true },
     taxPrice: { type: Number, required: true },
@@ -33,6 +39,7 @@ const orderSchema = new mongoose.Schema(
     isDelivered: { type: Boolean, default: false },
     deliveredAt: { type: Date },
   },
+
   {
     timestamps: true,
   }
