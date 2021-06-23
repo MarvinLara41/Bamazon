@@ -10,6 +10,9 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_REQUEST,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS,
+  USER_UPDATE_PROFILE_FAIL,
 } from "../constants/userConstants";
 
 export const signin = (email, password) => async (dispatch) => {
@@ -86,5 +89,29 @@ export const detailUser = (userId) => async (dispatch, getState) => {
         : error.message;
 
     dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  }
+};
+
+export const updateUserProfile = (user) => async (dispatch, getState) => {
+  dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: user });
+
+  const {
+    userSignin: { userInfo },
+  } = getState();
+
+  try {
+    const { data } = await axios.put(`/api/users/profile`, user, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
+    /**after update takes place, signin needs to be updated as well */
+    dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+    localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: USER_UPDATE_PROFILE_FAIL, payload: message });
   }
 };
