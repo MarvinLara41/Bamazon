@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { signout } from "./actions/userActions";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminRoute from './components/AdminRoute'
 import CartScreen from "./screens/CartScreen";
 
 /* Screens */
@@ -16,6 +17,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SigninScreen from "./screens/SigninScreen";
+import ProductListScreen from "./screens/ProductListScreen";
 
 function App() {
   /**showing notification of the number of items in the cart */
@@ -111,6 +113,7 @@ function App() {
               path="/profile"
               component={ProfileScreen}
             ></PrivateRoute>
+            <AdminRoute path="/productlist" component={ProductListScreen}></AdminRoute>
             <Route path="/" component={HomeScreen} exact></Route>
           </Switch>
         </main>
