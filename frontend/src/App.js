@@ -18,6 +18,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SigninScreen from "./screens/SigninScreen";
 import ProductListScreen from "./screens/ProductListScreen";
+import ProductEditScreen from "./screens/ProductEditScreen";
 
 function App() {
   /**showing notification of the number of items in the cart */
@@ -103,6 +104,11 @@ function App() {
         <main>
           <Switch>
             <Route path="/product/:id" component={ProductScreen} exact></Route>
+            <Route
+              path="/product/:id/edit"
+              component={ProductEditScreen}
+              exact
+            ></Route>
             <Route path="/cart/:id?" component={CartScreen}></Route>
             <Route path="/signin" component={SigninScreen}></Route>
             <Route path="/register" component={RegisterScreen}></Route>
