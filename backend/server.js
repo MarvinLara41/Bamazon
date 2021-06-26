@@ -5,23 +5,29 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
+import path from "path";
+
 import userRouter from "./routers/userRouter.js";
 import productRouter from "./routers/productRouter.js";
 import orderRouter from "./routers/orderRouter.js";
+import uploadRouter from "./routers/upLoadRouter.js";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5002;
+const __dirname = path.resolve();
 
+app.use("/api/uploads", uploadRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 //** Error handler */
 app.use((err, req, res, next) => {

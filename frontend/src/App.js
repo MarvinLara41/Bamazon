@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { signout } from "./actions/userActions";
 import PrivateRoute from "./components/PrivateRoute";
-import AdminRoute from './components/AdminRoute'
+import AdminRoute from "./components/AdminRoute";
 import CartScreen from "./screens/CartScreen";
 
 /* Screens */
@@ -75,9 +75,11 @@ function App() {
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
-            { userInfo && userInfo.isAdmin && (
+            {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
-                <Link to="#dropdown">Admin <i className="fa fa-caret-down"></i></Link>
+                <Link to="#dropdown">
+                  Admin <i className="fa fa-caret-down"></i>
+                </Link>
                 <ul className="dropdown-content">
                   <li>
                     <Link to="/dashboard"> DashBoard</Link>
@@ -94,13 +96,13 @@ function App() {
                     <Link to="/userlist">Users</Link>
                   </li>
                 </ul>
-                </div>
+              </div>
             )}
           </div>
         </header>
         <main>
           <Switch>
-            <Route path="/product/:id" component={ProductScreen}></Route>
+            <Route path="/product/:id" component={ProductScreen} exact></Route>
             <Route path="/cart/:id?" component={CartScreen}></Route>
             <Route path="/signin" component={SigninScreen}></Route>
             <Route path="/register" component={RegisterScreen}></Route>
@@ -113,7 +115,10 @@ function App() {
               path="/profile"
               component={ProfileScreen}
             ></PrivateRoute>
-            <AdminRoute path="/productlist" component={ProductListScreen}></AdminRoute>
+            <AdminRoute
+              path="/productlist"
+              component={ProductListScreen}
+            ></AdminRoute>
             <Route path="/" component={HomeScreen} exact></Route>
           </Switch>
         </main>
