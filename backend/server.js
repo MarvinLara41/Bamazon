@@ -27,6 +27,8 @@ app.use("/api/orders", orderRouter);
 app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
+
+/**Allows server to accept and display uploaded images */
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 //** Error handler */
