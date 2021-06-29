@@ -80,8 +80,8 @@ export default function ProductEditScreen(props) {
     setLoadingUpload(true);
     try {
       const { data } = await axios.post("/api/uploads", bodyFormData, {
-        header: {
-          "Content-Type": "mulipart/form-data",
+        headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${userInfo.token}`,
         },
       });

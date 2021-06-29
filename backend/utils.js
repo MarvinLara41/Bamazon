@@ -25,7 +25,7 @@ export const isAuth = (req, res, next) => {
       process.env.JWT_SECRET || "somethingsecret",
       (err, decode) => {
         if (err) {
-          res.status(401).send({ message: "Invalid Toekn." });
+          res.status(401).send({ message: "Invalid Token." });
         } else {
           req.user = decode;
           next();
@@ -39,9 +39,9 @@ export const isAuth = (req, res, next) => {
 
 //**securing admin access in backend */
 export const isAdmin = (req, res, next) => {
-  if(req.user && req.user.isAdmin){
-    next()
-  }else{
-    res.status(401).send({message: 'Invalid Admin.'})
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401).send({ message: "Invalid Admin." });
   }
-}
+};
