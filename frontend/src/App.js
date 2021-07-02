@@ -19,6 +19,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SigninScreen from "./screens/SigninScreen";
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
+import OrderListScreen from "./screens/OrderListScreen";
 
 function App() {
   /**showing notification of the number of items in the cart */
@@ -124,6 +125,10 @@ function App() {
             <AdminRoute
               path="/productlist"
               component={ProductListScreen}
+            ></AdminRoute>
+            <AdminRoute
+              path="/orderlist"
+              component={OrderListScreen}
             ></AdminRoute>
             <Route path="/" component={HomeScreen} exact></Route>
           </Switch>

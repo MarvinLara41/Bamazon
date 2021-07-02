@@ -2,7 +2,7 @@ import e from "express";
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
-import { isAuth } from "../utils.js";
+import { isAdmin, isAuth } from "../utils.js";
 
 const orderRouter = express.Router();
 
@@ -85,4 +85,16 @@ orderRouter.put(
   })
 );
 
+/** listing orders */
+orderRouter.get(
+  "/",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    /** accessing the collection 'user' and getting only the 'name' from this collection */
+    const orders = await Order.find({}).populate("user", "name");
+
+    res.send(orders);
+  })
+);
 export default orderRouter;
