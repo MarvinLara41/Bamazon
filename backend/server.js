@@ -31,13 +31,15 @@ app.get("/api/config/paypal", (req, res) => {
 /**Allows server to accept and display uploaded images */
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
+/** Heroku */
+app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
+);
+
 //** Error handler */
 app.use((err, req, res, next) => {
   res.status(500, res.send({ message: err.message }));
-});
-
-app.get("/", (req, res) => {
-  res.send("Sever is ready.");
 });
 
 //** Connect to MongoDB */
