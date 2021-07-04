@@ -45,7 +45,7 @@ app.use((err, req, res, next) => {
 //** Connect to MongoDB */
 
 mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost/Bamazon", {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
