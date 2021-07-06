@@ -36,6 +36,7 @@ productRouter.get(
     }
   })
 );
+
 productRouter.post(
   "/",
   isAuth,

@@ -6,8 +6,6 @@ import bcrypt from "bcryptjs";
 
 import User from "../models/userModel.js";
 
-import data from "../data.js";
-
 import { generateToken, isAuth } from "../utils.js";
 
 const userRouter = express.Router();
@@ -49,7 +47,7 @@ userRouter.post(
       name: req.body.name,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
-      isAdmin:req.body.isAdmin
+      isAdmin: req.body.isAdmin,
     });
 
     const createdUser = await user.save();
