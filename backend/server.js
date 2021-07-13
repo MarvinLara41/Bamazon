@@ -17,6 +17,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/build"));
+} else {
+  app.use(express.static("frontend/public"));
+}
+
 const port = process.env.PORT || 5002;
 const __dirname = path.resolve();
 
