@@ -27,11 +27,14 @@ export default function HomeScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <div className="row center">
-          {products.map((product) => (
-            <Product key={product._id} product={product}></Product>
-          ))}
-        </div>
+        <>
+          {products.length === 0 && <MessageBox>No products found.</MessageBox>}
+          <div className="row center">
+            {products.map((product) => (
+              <Product key={product._id} product={product}></Product>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

@@ -1,7 +1,6 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
-import data from "../data.js";
 import { isAdmin, isAuth } from "../utils.js";
 
 const productRouter = express.Router();
@@ -15,14 +14,7 @@ productRouter.get(
   })
 );
 
-productRouter.get(
-  "/seed",
-  expressAsyncHandler(async (req, res) => {
-    const createdProducts = await Product.insertMany(data.products);
 
-    res.send({ createdProducts });
-  })
-);
 
 productRouter.get(
   "/:id",
@@ -43,7 +35,7 @@ productRouter.post(
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
-      name: req.body.name + Date.now(),
+      name: req.body.name,
       image: req.body.image,
       price: req.body.price,
       category: req.body.category,
@@ -55,6 +47,8 @@ productRouter.post(
 
     if (createdProduct) {
       res.send({ message: "Product Created", product: createdProduct });
+    }else{
+      res.status(500).send({ message: "Error in creating product." });
     }
   })
 );
