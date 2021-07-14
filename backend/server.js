@@ -5,7 +5,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
+import config from './config.js'
+
 import path from "path";
+
 
 import userRouter from "./routers/userRouter.js";
 import productRouter from "./routers/productRouter.js";
@@ -26,12 +29,13 @@ if (process.env.NODE_ENV === "production") {
 const port = process.env.PORT || 5002;
 const __dirname = path.resolve();
 
+/**API */
 app.use("/api/uploads", uploadRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 app.get("/api/config/paypal", (req, res) => {
-  res.send(process.env.PAYPAL_CLIENT_ID || "sb");
+  res.send(config.PAYPAL_CLIENT_ID );
 });
 
 /**Allows server to accept and display uploaded images */
@@ -51,8 +55,10 @@ app.get("*", (req, res) =>
 );
 
 //** Connect to MongoDB */
+const mongodbURI = config.MONGODB_URI
+
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(mongodbURI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
