@@ -20,13 +20,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("frontend/build"));
-} else {
-  app.use(express.static("frontend/public"));
-}
 
-const port = process.env.PORT || 5002;
+const port = process.env.PORT;
 const __dirname = path.resolve();
 
 /**API */
@@ -49,10 +44,16 @@ app.use((err, req, res, next) => {
 
 
 /** Heroku */
-app.use(express.static(path.join(__dirname, "/frontend/build")));
-app.get("*", (req, res) =>
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
+  app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
-);
+)
+} else {
+  app.use(express.static("frontend/public"));
+}
+
+
 
 //** Connect to MongoDB */
 const mongodbURI = config.MONGODB_URI
