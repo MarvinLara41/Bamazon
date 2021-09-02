@@ -1,12 +1,19 @@
 {
   "name": "solar",
+  "proxy": "http://127.0.0.1:5002",
   "type": "module",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "cd backend && node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'frontend/*'\" \"npm run frontend\"",
+    "frontend": "cd frontend && npm run start",
+    "seed": "node scripts/seedDB.js",
+    "install": "cd frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,18 +27,19 @@
   "homepage": "https://github.com/MarvinLara41/Solar#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^6.2.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.12",
-    "multer": "^1.4.2"
+    "mongoose": "^5.13.8",
+    "multer": "^1.4.3"
   },
   "devDependencies": {
-    "eslint": "^7.27.0",
-    "eslint-plugin-react": "^7.23.2",
-    "nodemon": "^2.0.7"
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.25.1",
+    "nodemon": "^2.0.12"
   },
   "engines": {
     "node": "14.7.0",
